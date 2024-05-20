@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mnist-fastapi-deployment
+  labels: 
+    app: mnist-fastapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mnist-fastapi
+  template:
+    metadata:
+      labels: 
+        app: mnist-fastapi
+    spec:
+      containers:
+      - name: mnist-fastapi-container
+        image: mnist-fastapi-app:latest
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
